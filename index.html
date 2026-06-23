@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>🚀 AI Career Simulation Studio Pro</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Segoe UI',sans-serif;
+}
+
+body{
+background:linear-gradient(
+135deg,
+#0f172a,
+#1e293b,
+#111827
+);
+min-height:100vh;
+color:white;
+padding:20px;
+}
+
+@keyframes fadeIn{
+
+from{
+opacity:0;
+transform:translateY(15px);
+}
+
+to{
+opacity:1;
+transform:translateY(0);
+}
+
+}
+
+.container{
+max-width:1400px;
+margin:auto;
+}
+
+.header{
+text-align:center;
+margin-bottom:25px;
+animation:fadeIn .6s ease;
+}
+
+.header h1{
+font-size:2.4rem;
+color:#38bdf8;
+margin-bottom:10px;
+}
+
+.header p{
+color:#cbd5e1;
+font-size:1rem;
+}
+
+.main{
+display:grid;
+grid-template-columns:380px 1fr;
+gap:20px;
+}
+
+.panel{
+background:rgba(255,255,255,0.05);
+backdrop-filter:blur(14px);
+border:1px solid rgba(255,255,255,0.1);
+border-radius:20px;
+padding:20px;
+animation:fadeIn .5s ease;
+}
+
+.panel h2{
+margin-bottom:20px;
+color:#38bdf8;
+font-size:1.3rem;
+}
+
+label{
+display:block;
+margin-top:15px;
+margin-bottom:8px;
+font-weight:600;
+color:#e2e8f0;
+}
+
+select{
+width:100%;
+padding:12px;
+border:none;
+border-radius:12px;
+background:#0f172a;
+color:white;
+font-size:15px;
+outline:none;
+transition:.3s;
+}
+
+select:focus{
+box-shadow:0 0 10px rgba(56,189,248,.5);
+}
+
+button{
+width:100%;
+padding:15px;
+margin-top:25px;
+border:none;
+border-radius:12px;
+background:#38bdf8;
+color:#0f172a;
+font-weight:bold;
+font-size:16px;
+cursor:pointer;
+transition:.3s;
+}
+
+button:hover{
+transform:translateY(-3px);
+box-shadow:0 10px 20px rgba(56,189,248,.25);
+}
+
+.timeline-box{
+min-height:300px;
+max-height:500px;
+overflow-y:auto;
+padding-right:8px;
+animation:fadeIn .5s ease;
+}
+
+.timeline-box::-webkit-scrollbar{
+width:6px;
+}
+
+.timeline-box::-webkit-scrollbar-thumb{
+background:#38bdf8;
+border-radius:20px;
+}
+
+.timeline-title{
+font-size:1.4rem;
+color:#38bdf8;
+margin-bottom:20px;
+}
+
+.timeline{
+position:relative;
+padding-left:30px;
+min-height:300px;
+}
+
+.timeline::before{
+content:"";
+position:absolute;
+left:8px;
+top:0;
+width:4px;
+height:100%;
+min-height:300px;
+background:#38bdf8;
+border-radius:20px;
+}
+
+.timeline-item{
+position:relative;
+margin-bottom:25px;
+padding-left:25px;
+animation:fadeIn .4s ease;
+}
+
+.timeline-item::before{
+content:"";
+position:absolute;
+left:-31px;
+top:5px;
+width:18px;
+height:18px;
+border-radius:50%;
+background:#38bdf8;
+box-shadow:0 0 10px rgba(56,189,248,.8);
+}
+
+.timeline-item h4{
+margin-bottom:6px;
+color:#f8fafc;
+}
+
+.timeline-item p{
+color:#cbd5e1;
+line-height:1.6;
+}
+
+.dashboard{
+margin-top:20px;
+display:grid;
+grid-template-columns:
+repeat(auto-fit,minmax(180px,1fr));
+gap:15px;
+}
+
+.card{
+background:rgba(255,255,255,0.05);
+border:1px solid rgba(255,255,255,0.1);
+border-radius:15px;
+padding:18px;
+text-align:center;
+animation:fadeIn .4s ease;
+transition:.3s;
+}
+
+.card:hover{
+transform:translateY(-4px);
+}
+
+.card h3{
+font-size:15px;
+color:#94a3b8;
+margin-bottom:10px;
+}
+
+.card p{
+font-size:22px;
+font-weight:bold;
+color:#38bdf8;
+}
+
+.reason-box{
+margin-top:20px;
+background:rgba(255,255,255,0.05);
+border-radius:15px;
+padding:18px;
+border:1px solid rgba(255,255,255,0.1);
+animation:fadeIn .5s ease;
+}
+
+.reason-box h3{
+margin-bottom:12px;
+color:#38bdf8;
+}
+
+.reason-box p{
+line-height:1.7;
+color:#e2e8f0;
+}
+
+.skills-box,
+.recommend-box{
+margin-top:20px;
+background:rgba(255,255,255,0.05);
+border-radius:15px;
+padding:18px;
+border:1px solid rgba(255,255,255,0.1);
+animation:fadeIn .5s ease;
+}
+
+.skills-box h3,
+.recommend-box h3{
+margin-bottom:15px;
+color:#38bdf8;
+}
+
+.skills-list{
+display:flex;
+flex-wrap:wrap;
+gap:10px;
+}
+
+.skill{
+background:#0ea5e9;
+padding:8px 12px;
+border-radius:30px;
+font-size:14px;
+color:white;
+transition:.3s;
+}
+
+.skill:hover{
+transform:scale(1.05);
+}
+
+.recommend-box ul{
+padding-left:20px;
+}
+
+.recommend-box li{
+margin-bottom:10px;
+line-height:1.6;
+color:#e2e8f0;
+}
+
+.action-buttons{
+margin-top:20px;
+display:flex;
+gap:15px;
+}
+
+.action-buttons button{
+margin-top:0;
+}
+
+.footer{
+text-align:center;
+margin-top:25px;
+color:#94a3b8;
+font-size:14px;
+}
+
+@media(max-width:1000px){
+
+.main{
+grid-template-columns:1fr;
+}
+
+.action-buttons{
+flex-direction:column;
+}
+
+.header h1{
+font-size:2rem;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="header">
+
+<h1>🚀 AI Career Simulation Studio Pro</h1>
+
+<p>
+See Your Career Journey Before You Start It
+</p>
+
+</div>
+
+<div class="main">
+
+<div class="panel">
+
+<h2>Career Simulator</h2>
+
+<label>Career Path</label>
+
+<select id="career">
+<option value="">Select Career</option>
+<option>Data Scientist</option>
+<option>AI Engineer</option>
+<option>Data Analyst</option>
+<option>Cyber Security Analyst</option>
+<option>Full Stack Developer</option>
+<option>Cloud Engineer</option>
+</select>
+
+<label>Learning Speed</label>
+
+<select id="speed">
+<option value="">Select Speed</option>
+<option>Slow</option>
+<option>Average</option>
+<option>Fast</option>
+</select>
+
+<label>Work Preference</label>
+
+<select id="work">
+<option value="">Select Preference</option>
+<option>Remote</option>
+<option>Hybrid</option>
+<option>Office</option>
+</select>
+
+<label>Primary Goal</label>
+
+<select id="goal">
+<option value="">Select Goal</option>
+<option>High Salary</option>
+<option>Job Security</option>
+<option>Startup Founder</option>
+<option>Work-Life Balance</option>
+</select>
+
+<label>Simulation Duration</label>
+
+<select id="years">
+<option value="">Select Years</option>
+<option>3</option>
+<option>5</option>
+<option>10</option>
+</select>
+
+<button onclick="simulateCareer()">
+🚀 Simulate Career
+</button>
+
+</div>
+
+<div class="panel">
+
+<div class="timeline-box">
+
+<h2 class="timeline-title">
+📈 Career Timeline
+</h2>
+
+<div id="timeline" class="timeline">
+
+<div class="timeline-item">
+
+<h4>Ready To Simulate</h4>
+
+<p>
+Select your career preferences and generate
+your future career journey.
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="dashboard">
+
+<div class="card">
+<h3>Future Salary</h3>
+<p id="salary">--</p>
+</div>
+
+<div class="card">
+<h3>Success Probability</h3>
+<p id="success">--</p>
+</div>
+
+<div class="card">
+<h3>Risk Level</h3>
+<p id="risk">--</p>
+</div>
+
+<div class="card">
+<h3>Career Growth</h3>
+<p id="growth">--</p>
+</div>
+
+<div class="card">
+<h3>Difficulty</h3>
+<p id="difficulty">--</p>
+</div>
+
+</div>
+
+<div class="reason-box">
+
+<h3>🧠 Why This Outcome?</h3>
+
+<p id="reason">
+AI explanation will appear here.
+</p>
+
+</div>
+
+<div class="skills-box">
+
+<h3>🛠 Future Skills</h3>
+
+<div id="skills" class="skills-list">
+
+<span class="skill">
+Skills will appear here
+</span>
+
+</div>
+
+</div>
+
+<div class="recommend-box">
+
+<h3>🤖 AI Recommendations</h3>
+
+<ul id="recommendations">
+
+<li>
+Career recommendations will appear here.
+</li>
+
+</ul>
+
+</div>
+
+<div class="action-buttons">
+
+<button onclick="copyReport()">
+📋 Copy Report
+</button>
+
+<button onclick="downloadReport()">
+⬇ Download Report
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="footer">
+Day 15 • 30 Days 30 AI Websites Challenge
+</div>
+
+</div>
+
+<!-- DAY-15 V2 PART-2 JavaScript starts below -->
+
+<script>
+
+let generatedReport = "";
+
+function simulateCareer(){
+
+const career =
+document.getElementById("career").value;
+
+const speed =
+document.getElementById("speed").value;
+
+const work =
+document.getElementById("work").value;
+
+const goal =
+document.getElementById("goal").value;
+
+const years =
+parseInt(document.getElementById("years").value);
+
+if(
+career === "" ||
+speed === "" ||
+work === "" ||
+goal === "" ||
+isNaN(years)
+){
+alert("Please complete all fields.");
+return;
+}
+
+let success = 65;
+let growth = "High";
+let risk = "Medium";
+let difficulty = "";
+let salary = "";
+let skills = [];
+let recommendations = [];
+let timeline = [];
+let reason = "";
+
+const careerData = {
+
+"Data Scientist":{
+salary:"₹18 LPA - ₹30+ LPA",
+difficulty:"High",
+skills:[
+"Python",
+"SQL",
+"Machine Learning",
+"Statistics",
+"Data Visualization",
+"Power BI"
+]
+},
+
+"AI Engineer":{
+salary:"₹20 LPA - ₹35+ LPA",
+difficulty:"Very High",
+skills:[
+"Python",
+"Deep Learning",
+"NLP",
+"TensorFlow",
+"PyTorch",
+"LLMs"
+]
+},
+
+"Data Analyst":{
+salary:"₹10 LPA - ₹20 LPA",
+difficulty:"Medium",
+skills:[
+"Excel",
+"SQL",
+"Power BI",
+"Python",
+"Data Cleaning"
+]
+},
+
+"Cyber Security Analyst":{
+salary:"₹15 LPA - ₹28 LPA",
+difficulty:"High",
+skills:[
+"Linux",
+"Network Security",
+"Ethical Hacking",
+"SIEM",
+"Cloud Security"
+]
+},
+
+"Full Stack Developer":{
+salary:"₹12 LPA - ₹25 LPA",
+difficulty:"Medium",
+skills:[
+"HTML",
+"CSS",
+"JavaScript",
+"React",
+"Node.js",
+"MongoDB"
+]
+},
+
+"Cloud Engineer":{
+salary:"₹18 LPA - ₹32 LPA",
+difficulty:"High",
+skills:[
+"AWS",
+"Azure",
+"Docker",
+"Kubernetes",
+"Linux",
+"DevOps"
+]
+}
+
+};
+
+salary =
+careerData[career].salary;
+
+difficulty =
+careerData[career].difficulty;
+
+skills =
+careerData[career].skills;
+
+if(speed==="Fast"){
+success += 15;
+}
+
+else if(speed==="Average"){
+success += 8;
+}
+
+if(work==="Remote"){
+success += 4;
+}
+
+if(work==="Hybrid"){
+success += 2;
+}
+
+if(goal==="High Salary"){
+success += 8;
+growth = "Very High";
+}
+
+if(goal==="Job Security"){
+success += 6;
+risk = "Low";
+}
+
+if(goal==="Startup Founder"){
+success -= 5;
+risk = "High";
+growth = "Extreme";
+}
+
+if(goal==="Work-Life Balance"){
+growth = "Balanced";
+success += 3;
+}
+
+if(years===5){
+success += 4;
+}
+
+if(years===10){
+success += 8;
+}
+
+if(success>98){
+success=98;
+}
+
+if(success<50){
+success=50;
+}
+
+const randomEvents = [
+
+"🚀 Industry Boom: Demand increased significantly.",
+"🏆 Major Certification Completed.",
+"💼 Internship Opportunity Secured.",
+"📈 Strong Networking Growth.",
+"🤖 New AI Technology Adoption.",
+"⚠ Economic Slowdown Affected Hiring.",
+"🌎 Global Remote Opportunities Expanded.",
+"🔥 High Competition In Job Market."
+
+];
+
+const event =
+randomEvents[
+Math.floor(
+Math.random()*randomEvents.length
+)
+];
+
+timeline.push({
+year:"Year 1",
+task:`Learn ${skills[0]}, ${skills[1]} and build fundamentals.`
+});
+
+timeline.push({
+year:"Year 2",
+task:"Build projects and strengthen portfolio."
+});
+
+timeline.push({
+year:"Year 3",
+task:"Gain internship and practical experience."
+});
+
+if(years>=5){
+
+timeline.push({
+year:"Year 4",
+task:`Work as Junior ${career}.`
+});
+
+timeline.push({
+year:"Year 5",
+task:`Become experienced ${career}.`
+});
+
+}
+
+if(years===10){
+
+timeline.push({
+year:"Year 6",
+task:"Lead advanced projects."
+});
+
+timeline.push({
+year:"Year 7",
+task:"Specialize in trending technologies."
+});
+
+timeline.push({
+year:"Year 8",
+task:"Mentor junior professionals."
+});
+
+timeline.push({
+year:"Year 9",
+task:"Take leadership responsibilities."
+});
+
+timeline.push({
+year:"Year 10",
+task:"Reach senior/expert level position."
+});
+
+}
+
+timeline.push({
+year:"Career Event",
+task:event
+});
+
+reason =
+`${career} was selected with ${speed.toLowerCase()} learning speed and a focus on ${goal.toLowerCase()}. Based on your choices, the simulation predicts ${growth.toLowerCase()} growth with approximately ${success}% success probability.`;
+
+recommendations.push(
+`Master ${skills[0]} and ${skills[1]}.`
+);
+
+recommendations.push(
+"Build projects consistently."
+);
+
+recommendations.push(
+"Maintain an active GitHub profile."
+);
+
+recommendations.push(
+"Strengthen LinkedIn networking."
+);
+
+recommendations.push(
+"Earn industry-recognized certifications."
+);
+
+if(goal==="High Salary"){
+recommendations.push(
+"Target product-based companies."
+);
+}
+
+if(goal==="Startup Founder"){
+recommendations.push(
+"Learn entrepreneurship and marketing."
+);
+}
+
+let timelineHTML = "";
+
+timeline.forEach(item=>{
+
+timelineHTML += `
+
+<div class="timeline-item">
+
+<h4>${item.year}</h4>
+
+<p>${item.task}</p>
+
+</div>
+
+`;
+
+});
+
+document.getElementById("timeline").innerHTML =
+timelineHTML;
+
+document.getElementById("salary").textContent =
+salary;
+
+document.getElementById("success").textContent =
+success + "%";
+
+document.getElementById("risk").textContent =
+risk;
+
+document.getElementById("growth").textContent =
+growth;
+
+document.getElementById("difficulty").textContent =
+difficulty;
+
+document.getElementById("reason").textContent =
+reason;
+
+document.getElementById("skills").innerHTML =
+skills.map(skill =>
+`<span class="skill">${skill}</span>`
+).join("");
+
+document.getElementById("recommendations").innerHTML =
+recommendations.map(item =>
+`<li>${item}</li>`
+).join("");
+
+generatedReport = `
+
+AI CAREER SIMULATION STUDIO PRO
+
+Career:
+${career}
+
+Learning Speed:
+${speed}
+
+Work Preference:
+${work}
+
+Primary Goal:
+${goal}
+
+Simulation Duration:
+${years} Years
+
+Future Salary:
+${salary}
+
+Success Probability:
+${success}%
+
+Risk Level:
+${risk}
+
+Career Growth:
+${growth}
+
+Difficulty:
+${difficulty}
+
+Skills:
+${skills.join(", ")}
+
+Career Event:
+${event}
+
+AI Reason:
+${reason}
+
+Recommendations:
+${recommendations.join("\n")}
+
+`;
+
+}
+
+function copyReport(){
+
+if(generatedReport===""){
+alert("Generate a simulation first.");
+return;
+}
+
+navigator.clipboard.writeText(
+generatedReport
+);
+
+alert("Report copied successfully.");
+
+}
+
+function downloadReport(){
+
+if(generatedReport===""){
+alert("Generate a simulation first.");
+return;
+}
+
+const blob =
+new Blob(
+[generatedReport],
+{
+type:"text/plain"
+}
+);
+
+const link =
+document.createElement("a");
+
+link.href =
+URL.createObjectURL(blob);
+
+link.download =
+"AI_Career_Simulation_Report.txt";
+
+link.click();
+
+}
+
+</script>
+
+</body>
+</html>
